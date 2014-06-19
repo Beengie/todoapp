@@ -13,6 +13,7 @@ class TodosController < ApplicationController
     if @todo.save_with_tags
       redirect_to root_path
     else
+      @todos = Todo.all
       render :index
     end
   end

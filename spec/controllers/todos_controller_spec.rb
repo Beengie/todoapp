@@ -35,8 +35,7 @@ describe TodosController do
     end
     it "redirects to the root path when the input is valid" do
       post :create, todo: {name: "cook", description: "cook it"}
-      # expect(response).to redirect_to(root_path)
-      expect(response).to render_template(:index)
+      expect(response).to redirect_to(root_path)
     end
     it "does not create a todo when the input is invalid" do
       post :create, todo: {description: "cook it"}

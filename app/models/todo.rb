@@ -13,13 +13,10 @@ class Todo < ActiveRecord::Base
 
   def save_with_tags
     if save
-      location_string = name.slice(/.*\bAT\b(.*)/, 1).try(:strip)
-      if location_string
-        locations = location_string.split(/\,|and/).map(&:strip)
-        locations.each do |location|
-          tags.create(tag: "location:#{location}")
-        end
-      end
+      create_location_tags
+      true
+    else
+      false
     end
   end
 
@@ -29,6 +26,16 @@ class Todo < ActiveRecord::Base
   end
 
   private
+
+  def create_location_tags
+    location_string = name.slice(/.*\bAT\b(.*)/, 1).try(:strip)
+      if location_string
+        locations = location_string.split(/\,|and/).map(&:strip)
+        locations.each do |location|
+          tags.create(tag: "location:#{location}")
+        end
+      end
+  end
 
   def tag_text
     if tags.any?
