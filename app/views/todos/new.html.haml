@@ -1,0 +1,12 @@
+%section.new_todo
+  .row
+    .col-sm-6.col-sm-offset-3
+      = bootstrap_form_for(@todo, {action: "/todos/new", label_col: "col-sm-3", control_col: "col-sm-6"}) do |f|
+        %header
+          %h1{:style => "text-align:center;"} Add a new todo
+        %fieldset
+          = f.text_field :name, label: :Title
+          = f.text_area :description, label: :Description, rows: 6
+        %fieldset.actions.control-group.col-sm-offset-3
+          .controls
+            %input(type="submit" value="Add Todo" class="btn btn-default")

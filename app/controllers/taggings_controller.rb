@@ -1,0 +1,3 @@
+class TaggingsController < ApplicationController
+
+end
